@@ -34,7 +34,7 @@ resource "aws_subnet" "public" {
     ipv6_cidr_block = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, count.index)
     map_public_ip_on_launch = true
     tags = {
-        "Name" = "$(var.default_tags.env)-Public-Subnet"
+        "Name" = "${var.default_tags.env}-Public-Subnet-${data.aws_availability_zones.availability_zone.names[count.index]}"
     }
     availability_zone = data.aws_availability_zones.availability_zone.names[count.index]
 }
@@ -45,7 +45,7 @@ resource "aws_subnet" "private" {
     cidr_block = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index + var.public_subnet_count)
     map_public_ip_on_launch = true
     tags = {
-        "Name" = "$(var.default_tags.env)-Private-Subnet"
+        "Name" = "${var.default_tags.env}-Private-Subnet-${data.aws_availability_zones.availability_zone.names[count.index]}"
     }
     availability_zone = data.aws_availability_zones.availability_zone.names[count.index]
 }
