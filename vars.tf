@@ -3,7 +3,11 @@ variable "default_tags" {
   default = {
     "env" = "jdesjardins"
   }
-  description = "owners name"
-  
+  description = "owners name"  
+}
+variable "public_subnet_count" {
+    type = number
+    description = "avoiding conflict"
+    default = 2
 }
 
