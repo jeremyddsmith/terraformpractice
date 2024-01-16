@@ -1,0 +1,1 @@
+This Terraform code automates the creation of a 3 tier architecture including variables for code flexibility.
