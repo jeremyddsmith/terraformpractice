@@ -54,6 +54,12 @@ resource "aws_subnet" "private" {
 
 #Private RT
 
-#igw
+#igw 
+resource "aws_internet_gateway" "main-igw" {
+  vpc_id = aws_vpc.main.id
+  tags = {
+    "Name" = "${var.default_tags.env}-IGW"
+  }
+}
 
 #NAT
