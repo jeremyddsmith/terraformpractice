@@ -3,7 +3,7 @@ resource "aws_instance" "main" {
     instance_type = "t3.micro"
     key_name = "jdansible"
     subnet_id = aws_subnet.public[0].id
-    vpc_security_group_ids = ["sg-0e673f30eb234d1ba"]
+    vpc_security_group_ids = ["sg-07ee03d9e41b765c6"]
     tags = {
         "Name" = "${var.default_tags.env}-EC2"
     }
