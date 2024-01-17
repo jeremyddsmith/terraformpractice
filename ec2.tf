@@ -7,4 +7,5 @@ resource "aws_instance" "main" {
     tags = {
         "Name" = "${var.default_tags.env}-EC2"
     }
+    user_data = base64encode(file("C:\\Users\\Jeremy Local\\Documents\\Skillstorm\\Terraform\\user.sh"))
 }
