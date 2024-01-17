@@ -51,8 +51,35 @@ resource "aws_subnet" "private" {
 }
 
 #Public RT
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+  tags = {
+    "Name" = "${var.default_tags.env}-Public-RT"
+  }
+}
+
+#route for public route table
+resource "aws_route" "public" {
+  route_table_id         = aws_route_table.public.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.main-igw.id
+}
 
 #Private RT
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.main.id
+  tags = {
+    "Name" = "${var.default_tags.env}-Private-RT"
+  }
+}
+
+#route for private route table
+
+resource "aws_route" "private" {
+  route_table_id         = aws_route_table.private.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_nat_gateway.main_NAT.id
+}
 
 #igw 
 resource "aws_internet_gateway" "main-igw" {
@@ -62,4 +89,16 @@ resource "aws_internet_gateway" "main-igw" {
   }
 }
 
+#EIP
+resource "aws_eip" "NAT_EIP" {
+  domain = "vpc"
+}
+
 #NAT
+resource "aws_nat_gateway" "main_NAT" {
+  allocation_id = aws_eip.NAT_EIP.id
+  subnet_id     = aws_subnet.public[0].id
+  tags = {
+    "Name" = "${var.default_tags.env}-NAT-GW"
+  }
+} 
