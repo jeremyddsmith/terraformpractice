@@ -73,12 +73,28 @@ resource "aws_route_table" "private" {
   }
 }
 
+#public route table association
+
+resource "aws_route_table_association" "public" {
+  count          = var.public_subnet_count
+  subnet_id      = element(aws_subnet.public.*.id, count.index)
+  route_table_id = aws_route_table.public.id
+}
+
 #route for private route table
 
 resource "aws_route" "private" {
   route_table_id         = aws_route_table.private.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_nat_gateway.main_NAT.id
+}
+
+#private route table association
+
+resource "aws_route_table_association" "private" {
+  count          = var.private_subnet_count
+  subnet_id      = element(aws_subnet.private.*.id, count.index)
+  route_table_id = aws_route_table.private.id
 }
 
 #igw 
