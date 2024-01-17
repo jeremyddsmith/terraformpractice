@@ -65,20 +65,20 @@ resource "aws_route" "public" {
   gateway_id             = aws_internet_gateway.main-igw.id
 }
 
-#Private RT
-resource "aws_route_table" "private" {
-  vpc_id = aws_vpc.main.id
-  tags = {
-    "Name" = "${var.default_tags.env}-Private-RT"
-  }
-}
-
 #public route table association
 
 resource "aws_route_table_association" "public" {
   count          = var.public_subnet_count
   subnet_id      = element(aws_subnet.public.*.id, count.index)
   route_table_id = aws_route_table.public.id
+}
+
+#private route table
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.main.id
+  tags = {
+    "Name" = "${var.default_tags.env}-Private-RT"
+  }
 }
 
 #route for private route table
