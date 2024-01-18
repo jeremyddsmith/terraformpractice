@@ -24,6 +24,6 @@ variable "sg_db_egress" {
   description = "map of egress rules"
 }
 variable "sg_source" {
-    type= list(string)
+    type = list(string)
     description = "source security group rule"
 }
