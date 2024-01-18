@@ -1,7 +1,7 @@
 variable "default_tags" {
   type = map(string)
   default = {
-    "env" = "jdesjardins"
+    "env" = "jdesjardins1"
   }
   description = "owners name"
 }
