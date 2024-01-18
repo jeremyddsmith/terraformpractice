@@ -110,7 +110,7 @@ resource "aws_internet_gateway" "main-igw" {
   }
 }
 
-EIP
+# EIP
 resource "aws_eip" "NAT_EIP" {
   domain = "vpc"
 }
