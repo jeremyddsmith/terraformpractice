@@ -5,6 +5,11 @@ terraform {
       version = "5.32.1"
     }
   }
+  backend "s3" {
+    bucket = "jddbucket-111"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+  }
 }
 
 # Configure the AWS Provider
@@ -117,4 +122,3 @@ resource "aws_internet_gateway" "main-igw" {
 #   tags = {
 #     "Name" = "${var.default_tags.env}-NAT-GW"
 #   }
-# } 
