@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "backend" {
-    bucket = "jddbucket" #must be globally unique
+    bucket = "jddbucket-111" #must be globally unique
 }
 resource "aws_s3_bucket_versioning" "backend" {
     bucket = aws_s3_bucket.backend.id
