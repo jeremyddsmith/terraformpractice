@@ -122,3 +122,4 @@ resource "aws_nat_gateway" "main_NAT" {
   tags = {
     "Name" = "${var.default_tags.env}-NAT-GW"
   }
+}
