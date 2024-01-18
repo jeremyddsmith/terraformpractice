@@ -3,12 +3,12 @@ resource "aws_instance" "main" {
   instance_type          = "t3.micro"
   key_name               = "jdansible"
   subnet_id              = aws_subnet.public[0].id
-  vpc_security_group_ids = ["sg-06b1270861159e30d"] #must use your vpc's sg
+  vpc_security_group_ids = ["sg-0f43d1623f415f65b"] #must use your vpc's sg
   tags = {
     "Name" = "${var.default_tags.env}-EC2"
   }
   user_data = base64encode(file("user.sh"))
 }
 
-# output "ec2_ssh_command" {
-#     value = "ssh -i vbansible.pem ubuntu@ec2-${replace(aws_instance.main.public_ip, ".", "-")}.compute-1.amazonaws.com"
+# # output "ec2_ssh_command" {
+# #     value = "ssh -i vbansible.pem ubuntu@ec2-${replace(aws_instance.main.public_ip, ".", "-")}.compute-1.amazonaws.com"
